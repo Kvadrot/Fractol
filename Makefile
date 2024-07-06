@@ -2,7 +2,7 @@
 CC = gcc
 
 CFLAGS = -I ./minilibx-linux
-LD_FLAGS = -L ./minilibx-linux -lmlx -lXext -lX11
+LD_FLAGS = -L ./minilibx-linux -lmlx -lXext -lX11 -lm
 
 # Default sources
 SRCS = main.c
