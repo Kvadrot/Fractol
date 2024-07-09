@@ -6,7 +6,7 @@
 /*   By: itykhono <itykhono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 12:45:13 by itykhono          #+#    #+#             */
-/*   Updated: 2024/07/09 13:08:13 by itykhono         ###   ########.fr       */
+/*   Updated: 2024/07/09 14:38:00 by itykhono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,17 @@ math_val init_limits() {
     return main_set;
 }
 
+void destroy_app(void *p)
+{
+	main_obj *obj;
+
+    obj = (main_obj *)p;
+	mlx_destroy_image(obj->mlx, obj->image);
+	mlx_destroy_window(obj->mlx, obj->mlx_win);
+	mlx_destroy_display(obj->mlx);
+	free(obj->mlx);
+}
+
 int mandelbrot(double real, double imag) {
     double z_real = 0;
     double z_imag = 0;
@@ -105,8 +116,10 @@ int buttons_tap_handler_hook(int key, void *p) {
 
     obj = (main_obj *)p;
     if (key == 0xFF1B)
-        exit(0);
-	else if (key == 65361) //left
+	{
+        destroy_app(obj);
+		exit(0);
+	}	else if (key == 65361) //left
 	{
 		obj->math_num.x_offset -= 24;
 		printf("left\n");
@@ -129,8 +142,8 @@ int buttons_tap_handler_hook(int key, void *p) {
 }
 
 int close_cross_btn_tapped(void *p) {
-    printf("WIN is CLOSED\n");
-    exit(0);
+    destroy_app(p);
+	exit(0);
     return 0;
 }
 
