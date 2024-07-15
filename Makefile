@@ -1,38 +1,43 @@
-#Compiler
+# Compiler
 CC = gcc
 
+# Compiler and linker flags
 CFLAGS = -I ./minilibx-linux
 LD_FLAGS = -L ./minilibx-linux -lmlx -lXext -lX11 -lm
 
-# Default sources
-SRCS = main.c
+# Source and object files
+SRCS = main.c common_utilities.c mandelbrot_fts.c
 OBJS = $(SRCS:.c=.o)
 
-# Program Name
+# Program name
 NAME = fractol
 
+# MiniLibX library
+MINILIB = ./minilibx-linux/libmlx.a
+
 # Default rule
-all: $(NAME)
+all: $(MINILIB) $(NAME)
 
-# Make minilibx-linux
-minilibx-linux/libmlx.a:
-	make -C minilibx-linux
-
-$(NAME): $(OBJS) minilibx-linux/libmlx.a
+# Build the program
+$(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LD_FLAGS)
 
-# Clean up obj files
+# Build MiniLibX
+$(MINILIB):
+	make -C minilibx-linux
+
+# Clean object files
 clean:
 	make -C minilibx-linux clean
 	rm -f $(OBJS)
 
-# Full clean up
-fclean: fclean
+# Full clean
+fclean: clean
 	make -C minilibx-linux fclean
-	rm -f $(OBJS)
+	rm -f $(NAME)
 
 # Rebuild
 re: fclean all
 
-# Ensure that 'all', 'clean', 'fclean', 're', and 'bonus' are not interpreted as file names
+# Ensure that 'all', 'clean', 'fclean', and 're' are not interpreted as file names
 .PHONY: all clean fclean re
