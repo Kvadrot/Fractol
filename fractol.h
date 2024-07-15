@@ -6,7 +6,7 @@
 /*   By: itykhono <itykhono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 15:54:19 by itykhono          #+#    #+#             */
-/*   Updated: 2024/07/15 15:51:13 by itykhono         ###   ########.fr       */
+/*   Updated: 2024/07/15 16:10:16 by itykhono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #define WIN_HEIGHT 242
 #define ZOOM_STEP 1.2
 #define MAX_ITER 1000
+#define MANDELBROT_ID 333
+#define JULIA_ID 334
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -47,7 +49,7 @@ typedef struct {
     math_val math_num;
 } main_obj;
 
-math_val	init_limits();
+math_val	init_mandelbrot_limits();
 int			mandelbrot(double real, double imag);
 void		draw_mandelbrot(int bpp1, int sl1, int endian1, char *data, math_val *math_val);
 

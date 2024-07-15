@@ -6,13 +6,13 @@
 /*   By: itykhono <itykhono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 13:32:50 by itykhono          #+#    #+#             */
-/*   Updated: 2024/07/15 15:51:16 by itykhono         ###   ########.fr       */
+/*   Updated: 2024/07/15 16:10:10 by itykhono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h" 
 
-math_val init_limits() {
+math_val init_mandelbrot_limits() {
     math_val main_set;
     main_set.real_num.min = -2.0;
     main_set.real_num.max = 2.0;

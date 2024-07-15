@@ -6,7 +6,7 @@
 /*   By: itykhono <itykhono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 12:45:13 by itykhono          #+#    #+#             */
-/*   Updated: 2024/07/15 15:58:00 by itykhono         ###   ########.fr       */
+/*   Updated: 2024/07/15 16:24:21 by itykhono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ int zoom_hook(int button, int x, int y, void *p) {
 	double mouse_real = obj->math_num.real_num.min + ((x + obj->math_num.x_offset) * (obj->math_num.real_num.max - obj->math_num.real_num.min) / WIN_WIDTH);
     double mouse_imag = obj->math_num.imag_num.min + ((y + 	obj->math_num.y_offset) * (obj->math_num.imag_num.max - obj->math_num.imag_num.min) / WIN_HEIGHT);
 
-    if (button == 4) {  // Zoom in
+    if (button == 4) {
         zoom_factor = 1 / ZOOM_STEP;
-    } else if (button == 5) {  // Zoom out
+    } else if (button == 5) {
         zoom_factor = ZOOM_STEP;
     } else {
         return 0;
@@ -76,15 +76,18 @@ int zoom_hook(int button, int x, int y, void *p) {
     return 0;
 }
 
-main_obj ft_set_main_obj() {
+main_obj ft_set_main_obj(int fractal_id) {
     main_obj main_obj;
 
     main_obj.mlx = mlx_init();
     main_obj.mlx_win = mlx_new_window(main_obj.mlx, WIN_WIDTH, WIN_HEIGHT, "fractol");
     main_obj.image = mlx_new_image(main_obj.mlx, WIN_WIDTH, WIN_HEIGHT);
     main_obj.img_data = mlx_get_data_addr(main_obj.image, &(main_obj.bpp1), &(main_obj.sl1), &(main_obj.endian1));
-    main_obj.math_num = init_limits();
 
+	if (fractal_id == MANDELBROT_ID)
+    	main_obj.math_num = init_mandelbrot_limits();
+	else if (fractal_id == JULIA_ID)
+		main_obj.math_num = init_mandelbrot_limits();
     return main_obj;
 }
 
@@ -92,23 +95,29 @@ int handle_input(int argc, char **argv)
 {
 	if (argc < 2 || argc > 3)
 	{
-		write(1, "Wrong amount of param!\n", 23);
-		write(1, "Mandatory parameters amount(2):\n, ", ft_strlen("Mandatory parameters: amount(2)\n"));
-		write(1, "[mand/jul] | [sd]\n", 19);
-	} else {
-
+		write(1, "Wrong parameters!\n", 19);
+		write(1, "Example:\n ./fractol mandel\n", ft_strlen("Example:\n ./fractol mandel\n"));
+		write(1, "Or\n ./fractol jul 0.312331 0.312414\n", ft_strlen("Or\n ./fractol jul 0.312331 0.312414\n"));
+		return (404);
+	} else if (ft_strcmp(argv[1], "mandel") == 0) {
+		return (MANDELBROT_ID);
+	} else if (ft_strcmp(argv[1], "jul") == 0) {
+		return (JULIA_ID);
 	}
-	return (200);
+	return (404);
 }
 
 int main(int argc, char **argv) {
 
     main_obj main_obj;
+	int	fractal_id;
 
-	handle_input(argc, argv);
+	fractal_id = handle_input(argc, argv);
+	if (fractal_id == 404)
+		return (0);
+	else
+   		main_obj = ft_set_main_obj(fractal_id);
 
-    main_obj = ft_set_main_obj();
-	if (argv)
     draw_mandelbrot(main_obj.bpp1, main_obj.sl1, main_obj.endian1, main_obj.img_data, &(main_obj.math_num));
     mlx_put_image_to_window(main_obj.mlx, main_obj.mlx_win, main_obj.image, 0, 0);
     mlx_mouse_hook(main_obj.mlx_win, zoom_hook, &(main_obj));
