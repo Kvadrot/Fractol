@@ -6,7 +6,7 @@
 /*   By: itykhono <itykhono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 13:32:50 by itykhono          #+#    #+#             */
-/*   Updated: 2024/07/15 16:10:10 by itykhono         ###   ########.fr       */
+/*   Updated: 2024/07/15 17:59:37 by itykhono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,16 @@ math_val init_mandelbrot_limits() {
 }
 
 int mandelbrot(double real, double imag) {
-    double z_real = 0;
-    double z_imag = 0;
+    double z_real;
+    double z_imag;
+	double z_real_temp;
+
+    z_real = 0;
+    z_imag = 0;
+	z_real_temp = 0;
     int n = 0;
     while (z_real * z_real + z_imag * z_imag <= 4 && n < MAX_ITER) {
-        double z_real_temp = z_real * z_real - z_imag * z_imag + real;
+        z_real_temp = z_real * z_real - z_imag * z_imag + real;
         z_imag = 2 * z_real * z_imag + imag;
         z_real = z_real_temp;
         n++;

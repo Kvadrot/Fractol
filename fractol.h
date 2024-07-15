@@ -6,7 +6,7 @@
 /*   By: itykhono <itykhono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 15:54:19 by itykhono          #+#    #+#             */
-/*   Updated: 2024/07/15 16:10:16 by itykhono         ###   ########.fr       */
+/*   Updated: 2024/07/15 20:07:41 by itykhono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,18 @@ typedef struct {
     double y_offset;
 } math_val;
 
+// typedef struct {
+//     void *mlx;
+//     void *mlx_win;
+//     void *image;
+//     char *img_data;
+//     int bpp1;
+//     int sl1;
+//     int endian1;
+//     math_val math_num;
+// } main_obj;
 typedef struct {
+	int	fractal_id;
     void *mlx;
     void *mlx_win;
     void *image;
@@ -46,6 +57,8 @@ typedef struct {
     int bpp1;
     int sl1;
     int endian1;
+	double julia_real;
+	double julia_imag;
     math_val math_num;
 } main_obj;
 
