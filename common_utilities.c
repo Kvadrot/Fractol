@@ -6,7 +6,7 @@
 /*   By: itykhono <itykhono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 12:24:50 by itykhono          #+#    #+#             */
-/*   Updated: 2024/07/17 13:38:15 by itykhono         ###   ########.fr       */
+/*   Updated: 2024/07/17 17:39:53 by itykhono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,23 @@ int	ft_atod(char *str_num, double *save_to)
 		fractinal_temp /= 10;
 	*save_to = (integer_temp + (fractinal_temp)) * sign;
 	return (200);
+}
+
+int	drawhelper(t_main_obj *obj, int iter, int x, int y)
+{
+	int	color;
+	int	brightness;
+	int	pixel_index;
+
+	if (iter == MAX_ITER)
+		color = 0x000000;
+	else
+	{
+		brightness = 255 * iter / MAX_ITER;
+		color = (brightness << 16) + (brightness << 8) + brightness;
+	}
+	pixel_index = (y * obj->sl1) + (x * obj->bpp1 / 8);
+	obj->img_data[pixel_index] = color;
+	obj->img_data[pixel_index + 1] = (color >> 8);
+	obj->img_data[pixel_index + 2] = (color >> 16);
 }

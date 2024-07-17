@@ -6,7 +6,7 @@
 /*   By: itykhono <itykhono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 13:39:10 by itykhono          #+#    #+#             */
-/*   Updated: 2024/07/17 14:30:51 by itykhono         ###   ########.fr       */
+/*   Updated: 2024/07/17 17:37:31 by itykhono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,7 @@ int	julia(double real, double comp, double real_num, double complex_num)
 	return (n);
 }
 
-int	drawhelper(main_obj *obj, int iter, int x, int y)
-{
-	int	color;
-	int	brightness;
-	int	pixel_index;
-
-	if (iter == MAX_ITER)
-		color = 0x000000;
-	else
-	{
-		brightness = 255 * iter / MAX_ITER;
-		color = (brightness << 16) + (brightness << 8) + brightness;
-	}
-	pixel_index = (y * obj->sl1) + (x * obj->bpp1 / 8);
-	obj->img_data[pixel_index] = color;
-	obj->img_data[pixel_index + 1] = (color >> 8);
-	obj->img_data[pixel_index + 2] = (color >> 16);
-}
-
-void	draw_julia(main_obj *obj, double real_num, double complex_num)
+void	draw_julia(t_main_obj *obj, double real_num, double complex_num)
 {
 	int		x;
 	int		y;
