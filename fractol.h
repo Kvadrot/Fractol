@@ -6,7 +6,7 @@
 /*   By: itykhono <itykhono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 15:54:19 by itykhono          #+#    #+#             */
-/*   Updated: 2024/07/16 17:22:12 by itykhono         ###   ########.fr       */
+/*   Updated: 2024/07/17 13:30:28 by itykhono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #define WIN_WIDTH 242
 #define WIN_HEIGHT 242
 #define ZOOM_STEP 1.2
-#define MAX_ITER 1000
+#define MAX_ITER 100
 #define MANDELBROT_ID 333
 #define JULIA_ID 334
 
@@ -66,8 +66,10 @@ math_val	init_mandelbrot_limits();
 int			mandelbrot(double real, double imag);
 void		draw_mandelbrot(int bpp1, int sl1, int endian1, char *data, math_val *math_val);
 
-size_t		ft_strlen(const char *str);
-int			ft_strcmp(char *s1, char *s2);
-int			ft_atoi(const char *nptr);
+size_t	ft_strlen(const char *str);
+int		ft_strcmp(char *s1, char *s2);
+int		ft_atoi(const char *nptr);
+int		ft_atod(char *str_num, double *save_to);
+
 
 #endif

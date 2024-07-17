@@ -6,7 +6,7 @@
 /*   By: itykhono <itykhono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 12:45:13 by itykhono          #+#    #+#             */
-/*   Updated: 2024/07/17 10:44:04 by itykhono         ###   ########.fr       */
+/*   Updated: 2024/07/17 13:29:36 by itykhono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void draw_julia(main_obj *obj, double real_num, double complex_num)
             int n = julia(real, imag, real_num, complex_num);
 
             // Map the number of iterations to a color
-            if (n == MAX_ITER)
+    		if (n == MAX_ITER)
             {
                 color = 0x000000; // Black for points inside the set
             }
@@ -141,41 +141,6 @@ int zoom_hook(int button, int x, int y, void *p)
     return 0;
 }
 
-int	atod(char *str_num, double *save_to)
-{
-	int i = 0;
-	int tens;
-	double integer_temp;
-	double fractinal_temp;
-	int sign;
-
-	tens = 1;
-	integer_temp = 0;
-	fractinal_temp = 0;
-	//TODO: handle int MAX
-	while (str_num[i] >= '0' && str_num[i] <= '9')
-	{
-		integer_temp *= 10;
-		integer_temp += ft_atoi(str_num);
-		i++;
-	}
-	if (str_num[i] == '.') {
-		i++;
-		while (str_num[i] >= '0' && str_num[i] <= '9')
-		{
-			fractinal_temp /= 10;
-			fractinal_temp += ft_atoi(str_num);
-			i++;
-			tens *= 10;
-		}
-	} else {
-		return (404);
-	}
-	*save_to = integer_temp + (fractinal_temp / tens);
-	printf("save_to = %f", *save_to);
-	return (200);
-}
-
 main_obj ft_set_main_obj(int fractal_id, char **argv, int argc)
 {
     main_obj main_obj;
@@ -196,14 +161,13 @@ main_obj ft_set_main_obj(int fractal_id, char **argv, int argc)
         main_obj.math_num = init_mandelbrot_limits();
         if (argc == 4)
         {
-			//TODO: add FT_ATOI
-            main_obj.julia_real = atod(argv[2], &(main_obj.julia_real));
-            main_obj.julia_imag = atod(argv[3], &(main_obj.julia_imag));
+			ft_atod(argv[2], &(main_obj.julia_real));
+            ft_atod(argv[3], &(main_obj.julia_imag));
         }
         else
         {
-            main_obj.julia_real = -0.7;
-            main_obj.julia_imag = 0.27015;
+            main_obj.julia_real = -0.8;
+            main_obj.julia_imag = 0.156;
         }
     }
 
