@@ -6,7 +6,7 @@ CFLAGS = -I ./minilibx-linux
 LD_FLAGS = -L ./minilibx-linux -lmlx -lXext -lX11 -lm
 
 # Source and object files
-SRCS = main.c common_utilities.c mandelbrot_fts.c
+SRCS = main.c common_utilities.c mandelbrot_fts.c julia_fts.c
 OBJS = $(SRCS:.c=.o)
 
 # Program name

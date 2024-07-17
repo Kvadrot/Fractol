@@ -6,7 +6,7 @@
 /*   By: itykhono <itykhono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 15:54:19 by itykhono          #+#    #+#             */
-/*   Updated: 2024/07/17 13:30:28 by itykhono         ###   ########.fr       */
+/*   Updated: 2024/07/17 13:43:40 by itykhono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,6 @@ typedef struct {
     double y_offset;
 } math_val;
 
-// typedef struct {
-//     void *mlx;
-//     void *mlx_win;
-//     void *image;
-//     char *img_data;
-//     int bpp1;
-//     int sl1;
-//     int endian1;
-//     math_val math_num;
-// } main_obj;
 typedef struct {
 	int	fractal_id;
     void *mlx;
@@ -65,6 +55,8 @@ typedef struct {
 math_val	init_mandelbrot_limits();
 int			mandelbrot(double real, double imag);
 void		draw_mandelbrot(int bpp1, int sl1, int endian1, char *data, math_val *math_val);
+void		draw_julia(main_obj *obj, double real_num, double complex_num);
+
 
 size_t	ft_strlen(const char *str);
 int		ft_strcmp(char *s1, char *s2);

@@ -6,14 +6,11 @@
 /*   By: itykhono <itykhono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 12:24:50 by itykhono          #+#    #+#             */
-/*   Updated: 2024/07/17 13:05:23 by itykhono         ###   ########.fr       */
+/*   Updated: 2024/07/17 13:38:15 by itykhono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "fractol.h"
-#include <stdio.h>
-#include <stdlib.h>
-
+#include "fractol.h"
 
 size_t	ft_strlen(const char *str)
 {
@@ -32,7 +29,7 @@ int	ft_strcmp(char *s1, char *s2)
 	int	i;
 
 	i = 0;
-	while 	(s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
+	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
 	{
 		i++;
 	}
@@ -66,14 +63,15 @@ int	ft_atoi(const char *nptr)
 
 int	ft_atod(char *str_num, double *save_to)
 {
-	int i = 0;
-	double integer_temp;
-	double fractinal_temp;
-	int sign;
+	int		i;
+	int		sign;
+	double	integer_temp;
+	double	fractinal_temp;
 
+	sign = 1;
+	i = 0;
 	integer_temp = 0;
 	fractinal_temp = 0;
-	sign = 1;
 	if (str_num[i] == '-')
 	{
 		sign = -1;
@@ -94,7 +92,8 @@ int	ft_atod(char *str_num, double *save_to)
 			fractinal_temp += str_num[i] - '0';
 			i++;
 		}
-	} else
+	}
+	else
 		return (404);
 	while (fractinal_temp > 1)
 		fractinal_temp /= 10;
