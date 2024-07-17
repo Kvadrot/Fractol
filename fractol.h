@@ -6,7 +6,7 @@
 /*   By: itykhono <itykhono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 15:54:19 by itykhono          #+#    #+#             */
-/*   Updated: 2024/07/15 20:07:41 by itykhono         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:22:12 by itykhono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,8 @@ math_val	init_mandelbrot_limits();
 int			mandelbrot(double real, double imag);
 void		draw_mandelbrot(int bpp1, int sl1, int endian1, char *data, math_val *math_val);
 
-
 size_t		ft_strlen(const char *str);
 int			ft_strcmp(char *s1, char *s2);
-
-
+int			ft_atoi(const char *nptr);
 
 #endif
