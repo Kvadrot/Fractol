@@ -6,7 +6,7 @@
 /*   By: itykhono <itykhono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 15:54:19 by itykhono          #+#    #+#             */
-/*   Updated: 2024/07/17 17:38:11 by itykhono         ###   ########.fr       */
+/*   Updated: 2024/07/25 16:27:27 by itykhono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ size_t		ft_strlen(const char *str);
 int			ft_strcmp(char *s1, char *s2);
 int			ft_atoi(const char *nptr);
 int			ft_atod(char *str_num, double *save_to);
+int			validate_jul_param(char *param);
 
 #endif
