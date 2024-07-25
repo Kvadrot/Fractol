@@ -6,7 +6,7 @@
 /*   By: itykhono <itykhono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 13:17:41 by itykhono          #+#    #+#             */
-/*   Updated: 2024/07/25 17:18:08 by itykhono         ###   ########.fr       */
+/*   Updated: 2024/07/25 17:34:13 by itykhono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,17 @@ int	validate_jul_param(char *param)
 	return (200);
 }
 
+static int	convert_after_dot(int *i, double *div, double *f_temp, char *str)
+{
+	(*i)++;
+	while (str[*i] >= '0' && str[*i] <= '9')
+	{
+		*f_temp = *f_temp * 10 + (str[*i] - '0');
+		*div *= 10;
+		(*i)++;
+	}
+}
+
 void	ft_atod(char *str_num, double *save_to)
 {
 	double	integer_temp;
@@ -66,15 +77,7 @@ void	ft_atod(char *str_num, double *save_to)
 		i++;
 	}
 	if (str_num[i] == '.')
-	{
-		i++;
-		while (str_num[i] >= '0' && str_num[i] <= '9')
-		{
-			fractional_temp = fractional_temp * 10 + (str_num[i] - '0');
-			divisor *= 10;
-			i++;
-		}
-	}
+		convert_after_dot(&i, &divisor, &fractional_temp, str_num);
 	*save_to = (integer_temp + (fractional_temp / divisor)) * sign;
 }
 /*
