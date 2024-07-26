@@ -6,15 +6,15 @@
 /*   By: itykhono <itykhono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 12:24:50 by itykhono          #+#    #+#             */
-/*   Updated: 2024/07/24 14:00:00 by itykhono         ###   ########.fr       */
+/*   Updated: 2024/07/26 13:42:54 by itykhono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-size_t	ft_strlen(const char *str)
+size_t		ft_strlen(const char *str)
 {
-	unsigned int	i;
+	size_t i;
 
 	i = 0;
 	while (str[i] != '\0')
@@ -36,41 +36,65 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-void	ft_mini_atoi(char *str, int *i, double *temp)
+int	interpolate_color(int color1, int color2, double t)
 {
-	while (str[*i] >= '0' && str[*i] <= '9')
-	{
-		*temp *= 10;
-		*temp += str[*i] - '0';
-		i += 1;
-	}
-	return ;
+	int	r;
+	int	g;
+	int	b;
+	int	temp_start;
+	int	temp_finish;
+
+	temp_start = (color1 >> 16) & 0xFF;
+	temp_finish = (color2 >> 16) & 0xFF;
+	r = (int)(temp_start + t * (temp_finish - temp_start));
+	temp_start = (color1 >> 8) & 0xFF;
+	temp_finish = (color1 >> 8) & 0xFF;
+	g = (int)(temp_start + t * (temp_finish - temp_start));
+	temp_start = color1 & 0xFF;
+	temp_finish = color2 & 0xFF;
+	b = (int)(temp_start + t * (temp_finish - temp_start));
+	return ((r << 16) + (g << 8) + b);
 }
 
-int	drawhelper(t_main_obj *obj, int iter, int x, int y)
+/*Blue
+Indigo
+Pink
+Yellow
+Orange
+Red*/
+
+int	get_color(int iter)
+{
+	int		palette[6];
+	double	t;
+	int		index;
+	double	local_t;
+
+	palette[0] = 0x0000FF;
+	palette[1] = 0x4B0082;
+	palette[2] = 0xFFC0CB;
+	palette[3] = 0xFFFF00;
+	palette[4] = 0xFFA500;
+	palette[5] = 0xFF0000;
+	if (iter == MAX_ITER)
+		return (0x000000);
+	t = (double)iter / MAX_ITER;
+	index = (int)(t * (6 - 1));
+	local_t = (t * (6 - 1)) - index;
+	return (interpolate_color(palette[index], palette[index + 1], local_t));
+}
+
+void	drawhelper(t_main_obj *obj, int iter, int x, int y)
 {
 	int	color;
-	int	brightness;
 	int	pixel_index;
 
 	if (iter == MAX_ITER)
 		color = 0x000000;
 	else
-	{
-		brightness = 255 * iter / MAX_ITER;
-		color = (brightness << 16) + (brightness << 8) + brightness;
-	}
+		color = get_color(iter);
 	pixel_index = (y * obj->sl1) + (x * obj->bpp1 / 8);
-	obj->img_data[pixel_index] = color;
-	obj->img_data[pixel_index + 1] = (color >> 8);
-	obj->img_data[pixel_index + 2] = (color >> 16);
+	obj->img_data[pixel_index] = color & 0xFF;
+	obj->img_data[pixel_index + 1] = (color >> 8) & 0xFF;
+	obj->img_data[pixel_index + 2] = (color >> 16) & 0xFF;
 }
-
-
-// int main()
-// {
-// 	double a = 0;
-
-// 	ft_atod("-0.asda4qw QWTR 	2U32UHN34ON123YU841O24Y8 123437812 234918 9YB asdasd as", &a);
-// 	printf("%f", a);
-// }

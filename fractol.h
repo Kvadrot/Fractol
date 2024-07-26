@@ -6,7 +6,7 @@
 /*   By: itykhono <itykhono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 15:54:19 by itykhono          #+#    #+#             */
-/*   Updated: 2024/07/25 16:27:27 by itykhono         ###   ########.fr       */
+/*   Updated: 2024/07/26 13:40:35 by itykhono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,15 @@ t_math_val	init_mandelbrot_limits(void);
 int			mandelbrot(double real, double imag);
 void		draw_mandelbrot(t_main_obj *obj);
 void		draw_julia(t_main_obj *obj, double real_num, double complex_num);
-int			drawhelper(t_main_obj *obj, int iter, int x, int y);
+void		drawhelper(t_main_obj *obj, int iter, int x, int y);
 size_t		ft_strlen(const char *str);
 int			ft_strcmp(char *s1, char *s2);
 int			ft_atoi(const char *nptr);
 int			ft_atod(char *str_num, double *save_to);
 int			validate_jul_param(char *param);
+void		convert_input_and_save(t_main_obj *main_obj, char **argv);
+t_main_obj	ft_set_main_obj(int fractal_id, char **argv, int argc);
+void		destroy_app(t_main_obj *obj, int exit_id);
+
 
 #endif
